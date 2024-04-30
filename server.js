@@ -16,6 +16,20 @@ const corsHandler = cors({
 });
 
 app.use(corsHandler);
+mongoose
+  .connect("mongodb://127.0.0.1:27017/ecommercepractice")
+  .then(() => {
+    console.log("MongoDB Connected");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+const productRouter = require("./routes/product");
+const categoryRouter = require("./routes/category");
+
+app.use("/products", productRouter);
+app.use("/categories", categoryRouter);
 
 app.listen(5000, () => {
   console.log("Server is running at http://localhost:5000");
