@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     res.status(200).send(categories);
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Cannot retreive Categories",
     });
   }
 });

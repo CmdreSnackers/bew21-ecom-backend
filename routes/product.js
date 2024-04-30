@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
     res.status(200).send(products);
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Cannot Retreve Products",
     });
   }
 });
@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).send(product);
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Product not found",
     });
   }
 });
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     res.status(200).send(newProduct);
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Cannot create Product",
     });
   }
 });
@@ -66,7 +66,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).send(updatedProduct);
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Cannot Update Product",
     });
   }
 });
@@ -78,7 +78,7 @@ router.delete("/:id", async (req, res) => {
     res.status(200).send("Deleted Product");
   } catch (error) {
     res.status(400).send({
-      message: error.message,
+      message: "Product not Found",
     });
   }
 });
