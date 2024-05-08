@@ -27,9 +27,11 @@ mongoose
 
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
+const orderRoute = require("./routes/order");
 
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
+app.use("/orders", orderRoute);
 
 app.listen(5000, () => {
   console.log("Server is running at http://localhost:5000");
