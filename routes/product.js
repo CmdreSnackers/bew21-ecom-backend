@@ -86,6 +86,7 @@
 // module.exports = router;
 
 const express = require("express");
+
 const {
   addProduct,
   getProducts,
@@ -94,8 +95,20 @@ const {
   deleteProduct,
 } = require("../controllers/product");
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
+
+// const upload = multer({ storage });
+
 // set up product router
 const router = express.Router();
+const { isUserValid, isAdmin } = require("../middleware/auth");
 
 // get products
 router.get("/", async (req, res) => {
@@ -120,7 +133,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   try {
     const { name, description, price, category } = req.body;
     const newProduct = await addProduct(name, description, price, category);
@@ -131,15 +144,16 @@ router.post("/", async (req, res) => {
 });
 
 // Update
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
   try {
-    const { name, description, price, category } = req.body;
+    const { name, description, price, category, image } = req.body;
     const updatedProduct = await updateProduct(
       req.params.id,
       name,
       description,
       price,
-      category
+      category,
+      image
     );
     res.status(200).send(updatedProduct);
   } catch (error) {
@@ -148,7 +162,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     await deleteProduct(id);
