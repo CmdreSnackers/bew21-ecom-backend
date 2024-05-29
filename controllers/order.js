@@ -65,6 +65,12 @@ const addNewOrder = async (
       description: "Payment for order",
       callback_url: FRONTEND_URL + "verify-payment",
       redirect_url: FRONTEND_URL + "verify-payment",
+      /*
+          callback_url:
+          "http://localhost:3000/verify-payment",
+        redirect_url:
+          "http://localhost:3000/verify-payment",
+      */
     },
   });
 
